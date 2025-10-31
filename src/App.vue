@@ -7,21 +7,16 @@
 
     <main class="layout">
       <section class="list">
-        <section class="list">
-          <ul class="planet-list">
-            <li v-for="p in planets" :key="p.url" class="planet-item">
-              <strong>{{ p.name }}</strong>
-              <span class="meta"> • terrain: {{ p.terrain }} • population: {{ p.population }}</span>
-            </li>
-          </ul>
+        <div class="planet-list">
+          <PlanetCard v-for="p in planets" :key="p.url" :planet="p" />
+        </div>
 
-          <div class="loadmore">
-            <button @click="loadMore" :disabled="loading || !hasMore">
-              {{ loading ? 'Loading…' : hasMore ? 'Load more' : 'No more planets' }}
-            </button>
-            <p v-if="error" class="error">{{ error }}</p>
-          </div>
-        </section>
+        <div class="loadmore">
+          <button @click="loadMore" :disabled="loading || !hasMore">
+            {{ loading ? 'Loading…' : hasMore ? 'Load more' : 'No more planets' }}
+          </button>
+          <p v-if="error" class="error">{{ error }}</p>
+        </div>
       </section>
 
       <aside class="sidebar">
@@ -34,6 +29,7 @@
 <script setup lang="ts">
   import { onMounted } from 'vue'
   import { usePlanets } from '@/composables/usePlanets'
+  import PlanetCard from '@/components/PlanetCard/PlanetCard.vue'
 
   const { planets, hasMore, loading, error, loadInitial, loadMore } = usePlanets()
 
@@ -76,11 +72,9 @@
   }
 
   .planet-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
   }
   .planet-item {
     @include card;
@@ -89,16 +83,17 @@
     opacity: 0.7;
     margin-left: 0.25rem;
   }
+
   .loadmore {
     display: grid;
     place-items: center;
     gap: 0.5rem;
     margin-top: 0.75rem;
   }
+
   .error {
     color: #b91c1c;
   }
-
   .sidebar {
     background: $color-sidebar-bg;
     border-radius: $radius;

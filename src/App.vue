@@ -1,30 +1,71 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <div class="app">
+    <header class="header">
+      <h1>Planet Hopper</h1>
+      <button @click="onRestart">Restart Demo</button>
+    </header>
+
+    <main class="layout">
+      <section class="list">
+        <p>Planets</p>
+      </section>
+
+      <aside class="sidebar">
+        <p>Trips</p>
+      </aside>
+    </main>
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+<script setup lang="ts">
+function onRestart() {
+  window.location.reload()
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+</script>
+
+<style lang="scss" scoped>
+@use "./styles/variables" as *;
+@use "./styles/mixins" as *;
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: $color-bg;
+  color: $color-text;
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+
+.header {
+  @include flex-between;
+  padding: 1rem 2rem;
+  background: white;
+  border-bottom: 1px solid $color-border;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  flex: 1;
+}
+
+.list {
+  @include card;
+}
+
+.sidebar {
+  background: $color-sidebar-bg;
+  border-radius: $radius;
+  padding: $spacing;
+}
+
+@media (max-width: 960px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    order: -1;
+  }
 }
 </style>

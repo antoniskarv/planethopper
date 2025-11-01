@@ -16,6 +16,7 @@ export function useSelections() {
   function select(planet: SwapiPlanet) {
     if (isSelected(planet.name)) return
     if (selected.value.length >= 5) return
+
     selected.value.push({ name: planet.name, url: planet.url })
   }
 

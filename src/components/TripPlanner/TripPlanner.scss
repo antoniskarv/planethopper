@@ -2,19 +2,22 @@
 
 .trip-planner {
   background: $color-sidebar-bg;
-  border-radius: $radius;
-  padding: $spacing;
   display: grid;
   gap: 10px;
 
   &__header {
     display: flex;
     justify-content: space-between;
+    justify-self: center;
     align-items: center;
+    .title {
+      font-size: 1.2em;
+    }
   }
   &__empty {
     opacity: 0.7;
     padding: 6px 0;
+    color: $color-subtext;
   }
   &__list {
     margin: 0;
@@ -25,12 +28,10 @@
   }
   &__item {
     background: #fff;
-    border: 1px solid $color-border;
-    border-radius: 8px;
     padding: 6px 10px;
   }
   &__clear {
-    justify-self: start;
+    justify-self: center;
     background: transparent;
     color: #c03636;
     border: none;

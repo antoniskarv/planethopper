@@ -8,7 +8,7 @@
 <template>
   <section class="trip-planner">
     <header class="trip-planner__header">
-      <h2>Your planetary route</h2>
+      <div class="trip-planner__header title">Your planetary route</div>
     </header>
 
     <div v-if="selected.length === 0" class="trip-planner__empty">
@@ -21,7 +21,12 @@
       </li>
     </ol>
 
-    <button class="trip-planner__clear" :disabled="selected.length === 0" @click="clear">
+    <button
+      v-if="selected.length > 0"
+      class="trip-planner__clear"
+      :disabled="selected.length === 0"
+      @click="clear"
+    >
       ✕ clear list
     </button>
   </section>

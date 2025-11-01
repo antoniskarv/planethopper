@@ -9,6 +9,5 @@
 @mixin card {
   background: white;
   border: 1px solid $color-border;
-  border-radius: $radius;
   padding: $spacing;
 }

@@ -8,7 +8,13 @@
     <main class="layout">
       <section class="list">
         <div class="planet-list">
-          <PlanetCard v-for="p in planets" :key="p.url" :planet="p" />
+          <PlanetCard
+            v-for="p in planets"
+            :key="p.url"
+            :planet="p"
+            :selected="isSelected(p.name)"
+            :onSelect="() => select(p)"
+          />
         </div>
 
         <div class="loadmore">
@@ -20,7 +26,7 @@
       </section>
 
       <aside class="sidebar">
-        <p>Trips</p>
+        <TripPlanner />
       </aside>
     </main>
   </div>
@@ -29,9 +35,12 @@
 <script setup lang="ts">
   import { onMounted } from 'vue'
   import { usePlanets } from '@/composables/usePlanets'
+  import { useSelections } from '@/composables/useSelections'
   import PlanetCard from '@/components/PlanetCard/PlanetCard.vue'
+  import TripPlanner from '@/components/TripPlanner/TripPlanner.vue'
 
   const { planets, hasMore, loading, error, loadInitial, loadMore } = usePlanets()
+  const { isSelected, select } = useSelections()
 
   onMounted(loadInitial)
 

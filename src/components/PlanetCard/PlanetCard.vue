@@ -3,11 +3,19 @@
   import { formatPopulation } from '@/utils/formatPopulation'
   import './PlanetCard.scss'
 
-  defineProps<{ planet: SwapiPlanet }>()
+  const props = defineProps<{
+    planet: SwapiPlanet
+    selected?: boolean
+    onSelect?: () => void
+  }>()
+
+  function handleClick() {
+    if (!props.selected && props.onSelect) props.onSelect()
+  }
 </script>
 
 <template>
-  <article class="planet-card">
+  <article class="planet-card" :class="{ 'planet-card--selected': selected }" @click="handleClick">
     <div class="planet-card__thumb" aria-hidden="true"></div>
     <div class="planet-card__content">
       <h3 class="planet-card__name">{{ planet.name }}</h3>

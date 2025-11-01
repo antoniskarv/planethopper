@@ -1,0 +1,40 @@
+@use '@/styles/variables' as *;
+
+.trip-planner {
+  background: $color-sidebar-bg;
+  border-radius: $radius;
+  padding: $spacing;
+  display: grid;
+  gap: 10px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__empty {
+    opacity: 0.7;
+    padding: 6px 0;
+  }
+  &__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 6px;
+  }
+  &__item {
+    background: #fff;
+    border: 1px solid $color-border;
+    border-radius: 8px;
+    padding: 6px 10px;
+  }
+  &__clear {
+    justify-self: start;
+    background: transparent;
+    color: #c03636;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+}

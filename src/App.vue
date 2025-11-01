@@ -16,7 +16,7 @@
             v-for="p in planets"
             :key="p.url"
             :planet="p"
-            :selected="isSelected(p.name)"
+            :selected="isSelected(keyOf(p))"
             :onSelect="() => select(p)"
           />
         </div>
@@ -44,7 +44,7 @@
   import TripPlanner from '@/components/TripPlanner/TripPlanner.vue'
 
   const { planets, hasMore, loading, error, loadInitial, loadMore } = usePlanets()
-  const { isSelected, select } = useSelections()
+  const { isSelected, select, keyOf } = useSelections()
 
   onMounted(loadInitial)
 

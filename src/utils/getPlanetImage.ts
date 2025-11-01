@@ -5,7 +5,7 @@ const IMAGES = [
 
 const cache = new Map<string, string | undefined>()
 
-export function getPlanetImageFor(key: string): string | undefined {
+export const getPlanetImageFor = (key: string) => {
   const hit = cache.get(key)
   if (hit) return hit
   const img = IMAGES[Math.floor(Math.random() * IMAGES.length)]

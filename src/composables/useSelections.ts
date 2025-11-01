@@ -2,6 +2,7 @@ import { ref } from 'vue'
 import type { SwapiPlanet } from '@/services/swapi'
 
 export type SelectedPlanet = {
+  key: string
   name: string
   url: string
 }
@@ -9,20 +10,23 @@ export type SelectedPlanet = {
 const selected = ref<SelectedPlanet[]>([])
 
 export function useSelections() {
-  function isSelected(name: string) {
-    return selected.value.some(p => p.name === name)
-  }
+  const keyOf = (planet: SwapiPlanet) => String(planet.url || planet.name)
 
-  function select(planet: SwapiPlanet) {
-    if (isSelected(planet.name)) return
+  const isSelected = (key: string) => selected.value.some(p => p.key === key)
+
+  const select = (planet: SwapiPlanet) => {
+    const key = keyOf(planet)
+    if (isSelected(key)) return
     if (selected.value.length >= 5) return
 
-    selected.value.push({ name: planet.name, url: planet.url })
+    selected.value.push({
+      key,
+      name: planet.name,
+      url: planet.url,
+    })
   }
 
-  function clear() {
-    selected.value = []
-  }
+  const clear = () => (selected.value = [])
 
-  return { selected, isSelected, select, clear }
+  return { selected, isSelected, select, clear, keyOf }
 }

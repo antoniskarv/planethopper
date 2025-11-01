@@ -12,7 +12,7 @@ type SwapiResponse = {
   results: SwapiPlanet[]
 }
 
-export async function getPlanets(page = 1): Promise<SwapiResponse> {
+export const getPlanets = async (page = 1): Promise<SwapiResponse> => {
   const res = await fetch(`https://swapi.py4e.com/api/planets/?page=${page}`)
   if (!res.ok) {
     throw new Error(`SWAPI error: ${res.status}`)

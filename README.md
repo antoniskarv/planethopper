@@ -1,5 +1,56 @@
-# Vue 3 + TypeScript + Vite
+# 🪐 Planet Hopper
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+A small Vue 3 demo app built for planet hopper.  
+Browse star wars planets, pick up to 5 for your “planetary route” and restart the demo any time.
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+🎥 **Live demo video:**  
+[https://www.loom.com/share/598c9532a9cf44c596c69a2ab14db684](https://www.loom.com/share/598c9532a9cf44c596c69a2ab14db684)
+
+---
+
+## 🚀 Tech Stack
+
+- **Vue 3.5 + Vite 6**
+- **TypeScript**
+- **SCSS modules** (component scoped styles + global variables/mixins)
+- **Vitest 3 + Testing Library Vue**
+- **Font Awesome** for icons
+- **SWAPI** (Star wars API) for data fetching
+
+---
+
+## 🧰 Setup & Scripts
+
+### 1. Install dependencies
+
+```bash
+npm install
+npm run dev
+```
+
+### 2. Run the dev server
+
+```bash
+npm run dev
+```
+
+---
+
+### 🧪 Testing
+
+Unit tests with Vitest (jsdom environment)
+DOM interactions via @testing-library/vue
+
+```bash
+npm run test
+```
+
+---
+
+### 🧱 Features
+
+- Fetches planet data from SWAPI
+- Infinite scroll / “Load more” functionality
+- Select up to 5 planets for your trip
+- Responsive layout
+- Random background image per planet (cached locally for each session)

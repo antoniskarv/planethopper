@@ -25,7 +25,6 @@ Browse star wars planets, pick up to 5 for your “planetary route” and restar
 
 ```bash
 npm install
-npm run dev
 ```
 
 ### 2. Run the dev server

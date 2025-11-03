@@ -6,6 +6,7 @@ export const usePlanets = () => {
   const page = ref(1)
   const hasMore = ref(true)
   const loading = ref(false)
+  const hasResults = ref(false)
   const error = ref<string | null>(null)
 
   const loadMore = async () => {
@@ -18,8 +19,15 @@ export const usePlanets = () => {
       .finally(() => (loading.value = false))
 
     if (!data) return
+
+    if (!data.results || data.results.length === 0) {
+      hasResults.value = false
+      return
+    }
+
+    hasResults.value = true
     planets.value.push(...data.results)
-    page.value++
+    page.value = page.value + 1
     hasMore.value = Boolean(data.next)
   }
 
@@ -30,5 +38,5 @@ export const usePlanets = () => {
     await loadMore()
   }
 
-  return { planets, page, hasMore, loading, error, loadInitial, loadMore }
+  return { planets, page, hasMore, loading, error, loadInitial, loadMore, hasResults }
 }

@@ -11,21 +11,22 @@
 
     <main class="layout">
       <section class="list">
-        <div class="planet-list">
+        <div v-if="hasResults" class="planet-list">
           <PlanetCard
-            v-for="p in planets"
-            :key="p.url"
-            :planet="p"
-            :selected="isSelected(keyOf(p))"
-            :onSelect="() => select(p)"
+            v-for="planet in planets"
+            :key="planet.url"
+            :planet="planet"
+            :selected="isSelected(planet)"
+            :onSelect="() => select(planet)"
           />
         </div>
+        <p v-else>No planets found</p>
 
         <div class="loadmore">
           <button @click="loadMore" v-if="hasMore === true">
             {{ loading ? 'Loading…' : 'Fetch planets' }}
           </button>
-          <p v-if="error" class="error">{{ error }}</p>
+          <p v-if="error" class="error">{{ error.value }}</p>
         </div>
       </section>
 
@@ -43,8 +44,8 @@
   import PlanetCard from '@/components/PlanetCard/PlanetCard.vue'
   import TripPlanner from '@/components/TripPlanner/TripPlanner.vue'
 
-  const { planets, hasMore, loading, error, loadInitial, loadMore } = usePlanets()
-  const { isSelected, select, keyOf } = useSelections()
+  const { planets, hasMore, loading, error, loadInitial, loadMore, hasResults } = usePlanets()
+  const { isSelected, select } = useSelections()
 
   onMounted(loadInitial)
 

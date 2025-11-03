@@ -1,6 +1,8 @@
 const IMAGES = [
   'https://images.ferryhopper.com/locations/Skiathos.jpg',
   'https://images.ferryhopper.com/locations/Naxos.jpg',
+  'https://images.ferryhopper.com/locations/Ios.jpg',
+  'https://images.ferryhopper.com/locations/Santorini.jpg',
 ] as const
 
 const cache = new Map<string, string | undefined>()

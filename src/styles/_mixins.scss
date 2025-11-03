@@ -1,11 +1,5 @@
 @use './variables' as *;
 
-@mixin flex-between {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 @mixin card {
   background: white;
   border: 1px solid $color-border;

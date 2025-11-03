@@ -2,25 +2,31 @@ import { ref } from 'vue'
 import type { SwapiPlanet } from '@/services/swapi'
 
 export type SelectedPlanet = {
-  key: string
+  id?: string
   name: string
-  url: string
+  url?: string
 }
 
 const selected = ref<SelectedPlanet[]>([])
 
 export function useSelections() {
-  const keyOf = (planet: SwapiPlanet) => String(planet.url || planet.name)
+  const extractIdFromUrl = (url: string) => {
+    const match = url.match(/\/(\d+)\/?$/)
+    return match ? match[1] : url
+  }
 
-  const isSelected = (key: string) => selected.value.some(p => p.key === key)
+  const isSelected = (planet: SwapiPlanet) => {
+    const id = extractIdFromUrl(planet.url)
+    return selected.value.some(p => p.id === id)
+  }
 
   const select = (planet: SwapiPlanet) => {
-    const key = keyOf(planet)
-    if (isSelected(key)) return
+    const id = extractIdFromUrl(planet.url)
+    if (isSelected(planet)) return
     if (selected.value.length >= 5) return
 
     selected.value.push({
-      key,
+      id,
       name: planet.name,
       url: planet.url,
     })
@@ -28,5 +34,5 @@ export function useSelections() {
 
   const clear = () => (selected.value = [])
 
-  return { selected, isSelected, select, clear, keyOf }
+  return { selected, isSelected, select, clear, extractIdFromUrl }
 }

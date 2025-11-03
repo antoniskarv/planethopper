@@ -8,6 +8,7 @@
       <h3 class="planet-card__name">{{ planet.name }}</h3>
 
       <div class="planet-card__meta">
+        <div>climate: {{ planet.climate }}</div>
         <div>terrain: {{ planet.terrain }}</div>
         <div>population: {{ formatPopulation(planet.population) }}</div>
       </div>
